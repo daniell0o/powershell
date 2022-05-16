@@ -15,7 +15,7 @@ Workflow Stop-Start-AzureVM
      
     $credential = Get-AutomationPSCredential -Name 'autopower_jHr0GcZSIgO8Ktr/QZ7oxpu5xd28VW3rSQN14o21V3U=' 
     Login-AzureRmAccount -Credential $credential 
-    Select-AzureRmSubscription -SubscriptionId $AzureSubscriptionId 
+    Select-AzureRmSubscription -SubscriptionId '6fe18a1c-f2ee-4aa1-880e-62ec865eeb71' 
  
     if($AzureVMList -ne "All") 
     { 

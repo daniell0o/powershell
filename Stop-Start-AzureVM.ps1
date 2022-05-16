@@ -4,7 +4,7 @@ Workflow Stop-Start-AzureVM
     (    
         [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
         [String] 
-        $AzureSubscriptionId, 
+        $AzureSubscriptionId="6fe18a1c-f2ee-4aa1-880e-62ec865eeb71", 
         [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
         [String] 
         $AzureVMList="All", 
@@ -13,7 +13,7 @@ Workflow Stop-Start-AzureVM
         $Action 
     ) 
      
-    $credential = Get-AutomationPSCredential -Name 'autopower_jHr0GcZSIgO8Ktr/QZ7oxpu5xd28VW3rSQN14o21V3U=' 
+    $credential = Get-AutomationPSCredential -Name 'terraform' 
     Login-AzureRmAccount -Credential $credential 
     Select-AzureRmSubscription -SubscriptionId '6fe18a1c-f2ee-4aa1-880e-62ec865eeb71' 
  

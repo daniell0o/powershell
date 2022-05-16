@@ -4,7 +4,7 @@ Workflow Stop-Start-AzureVM
     (    
         [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
         [String] 
-        $AzureSubscriptionId="6fe18a1c-f2ee-4aa1-880e-62ec865eeb71", 
+        $AzureSubscriptionId, 
         [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
         [String] 
         $AzureVMList="All", 
@@ -12,10 +12,11 @@ Workflow Stop-Start-AzureVM
         [String] 
         $Action 
     ) 
-     
-    $credential = Get-AutomationPSCredential -Name 'terraform' 
-    Login-AzureRmAccount -Credential $credential 
-    Select-AzureRmSubscription -SubscriptionId '6fe18a1c-f2ee-4aa1-880e-62ec865eeb71' 
+    $connectionAssetName = "AzureRunAsConnection"
+    $conn = Get-AutomationConnection -Name $ConnectionAssetName
+
+    Add-AzureRmAccount -ServicePrincipal -Tenant $conn.TenantID -ApplicationId $conn.ApplicationId -CertificateThumbprint $conn.CertificateThumbprint -ErrorAction Stop | Write-Verbose
+    Set-AzureRmContext -SubscriptionId $conn.SubscriptionId -ErrorAction Stop | Write-Verbose
  
     if($AzureVMList -ne "All") 
     { 
